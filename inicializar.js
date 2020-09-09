@@ -8,6 +8,21 @@ var requireDir = require('require-dir');
 function initApi(app) {
     connections_1.Connections.initialize();
     app.use(bodyparser.json({ limit: '50mb' }));
+    app.all('*', function (req, res, next) {
+        // res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+        // res.header('Access-Control-Allow-Origin', 'http://localhost:8100');
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+        res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,PATCH,OPTIONS');
+        // Permitir que el método OPTIONS funcione sin autenticación
+        if ('OPTIONS' === req.method) {
+            res.header('Access-Control-Max-Age', '1728000');
+            res.sendStatus(200);
+        }
+        else {
+            next();
+        }
+    });
     for (var m in config.modules) {
         if (config.modules[m].active) {
             var routes = requireDir(config.modules[m].path);
