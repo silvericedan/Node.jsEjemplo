@@ -1,0 +1,27 @@
+{
+  "name": "proyecto1",
+  "version": "1.0.0",
+  "description": "Api de prueba",
+  "main": "index.js",
+  "scripts": {
+    "startNode": "tsc && gulp && concurrently \"npm run node\" ",
+    "start": "concurrently -r \"npm run tsc:w\" \"npm run node\" ",
+    "node": "nodemon -q ./index.js",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "tsc:next": "tsc --target es2018 --lib es2018",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Reinaldo Hermosilla",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "14.6.0",
+    "body-parser": "1.19.0",
+    "concurrently": "5.3.0",
+    "express": "4.17.1",
+    "mongoose": "5.10.0",
+    "nodemon": "^2.0.4",
+    "require": "2.4.20",
+    "require-dir": "1.2.0"
+  }
+}
