@@ -32,7 +32,7 @@ router.put("/persona/:_id", function (req, res, next) {
 });
 router.delete("/persona/:_id", function (req, res, next) {
     console.log("Viene del DELETE: ");
-    persona_1.personaSchema.findByIdAndRemove(req.param._id, function (err, persona) {
+    persona_1.personaSchema.findByIdAndRemove(req.params._id, function (err, persona) {
         if (err) {
             console.log("Error: ", err);
         }
