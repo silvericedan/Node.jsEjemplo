@@ -28,11 +28,7 @@ router.post("/persona", (req, res) => {
 
 router.put("/persona/:_id", (req, res, next) => {
   console.log("Viene del PUT: ", req.body);
-  personaSchema.findByIdAndUpdate(
-    req.params._id,
-    req.body,
-    { new: true },
-    (err, persona) => {
+  personaSchema.findByIdAndUpdate(req.params._id, req.body,{ new: true }, (err, persona) => {
       if (err) {
         return err;
       }
