@@ -7,3 +7,7 @@ export const hosts = {
 
     }
 }
+
+export const key = {
+    secret: 'Ifes-secret-key'
+}
