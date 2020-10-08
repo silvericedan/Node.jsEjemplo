@@ -87,7 +87,7 @@ function login(usuario) {
                         msg = "Password invalido!!!";
                         return [2 /*return*/, msg];
                     }
-                    token = jwt.sign({ usuario: userLogin.username }, config_private_1.key.secret, { expiresIn: 86400 });
+                    token = jwt.sign({ id: userLogin.id, username: userLogin.username, email: userLogin.email, rol: 'Administrador' }, config_private_1.key.secret, { expiresIn: 86400 });
                     console.log('Token: ', token);
                     return [2 /*return*/, token];
                 case 2:

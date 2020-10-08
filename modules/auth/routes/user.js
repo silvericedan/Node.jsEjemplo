@@ -37,7 +37,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var express = require("express");
 var authController_1 = require("./../controllers/authController");
-var authJwt_1 = require("./../middlewares/authJwt");
 var router = express.Router();
 router.post('/registro', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var newRegistro, err_1;
@@ -59,7 +58,7 @@ router.post('/registro', function (req, res) { return __awaiter(void 0, void 0, 
         }
     });
 }); });
-router.post('/login', authJwt_1.verifyToken, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+router.post('/login', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var token, err_2;
     return __generator(this, function (_a) {
         switch (_a.label) {

@@ -1,5 +1,6 @@
 import * as express from "express";
 import { personaSchema } from "./../schemas/persona";
+import {verifyToken} from './../../auth/middlewares/authJwt';
 
 const router = express.Router();
 

@@ -34,7 +34,8 @@ export async function login(usuario: any) {
             return msg;
         }
 
-        let token = jwt.sign({usuario: userLogin.username}, key.secret, {expiresIn: 86400}); //Expira en 24 Hs
+        //let token = jwt.sign({usuario: userLogin.username}, key.secret, {expiresIn: 86400}); //Expira en 24 Hs
+        let token = jwt.sign({id: userLogin.id, username: userLogin.username, email: userLogin.email, rol: 'Administrador'}, key.secret, {expiresIn: 86400 });
         console.log('Token: ', token);
         return token;
     }catch(err){
