@@ -35,56 +35,31 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var express = require("express");
-var authController_1 = require("./../controllers/authController");
-var router = express.Router();
-router.post('/registro', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var newRegistro, err_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                console.log("Entra a registro", req.body);
-                _a.label = 1;
-            case 1:
-                _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, authController_1.registro(req.body)];
-            case 2:
-                newRegistro = _a.sent();
-                return [3 /*break*/, 4];
-            case 3:
-                err_1 = _a.sent();
-                throw err_1;
-            case 4: return [2 /*return*/];
-        }
+Object.defineProperty(exports, "__esModule", { value: true });
+var user_1 = require("../schemas/user");
+function checkusuario(user) {
+    return __awaiter(this, void 0, void 0, function () {
+        var usuario, err_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, user_1.userSchema.find({ username: user })];
+                case 1:
+                    usuario = _a.sent();
+                    if (usuario) {
+                        return [2 /*return*/, true];
+                    }
+                    else {
+                        return [2 /*return*/, false];
+                    }
+                    return [3 /*break*/, 3];
+                case 2:
+                    err_1 = _a.sent();
+                    throw err_1;
+                case 3: return [2 /*return*/];
+            }
+        });
     });
-}); });
-router.post('/login', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var token, err_2;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                console.log('Entra a login');
-                _a.label = 1;
-            case 1:
-                _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, authController_1.login(req.body)];
-            case 2:
-                token = _a.sent();
-                console.log('Este es el token: ', token);
-                res.send({
-                    mensaje: 'Login Exitoso',
-                    token: token
-                });
-                return [3 /*break*/, 4];
-            case 3:
-                err_2 = _a.sent();
-                res.send({
-                    error: err_2
-                });
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
-        }
-    });
-}); });
-module.exports = router;
-//# sourceMappingURL=user.js.map
+}
+//# sourceMappingURL=checkUsuario.js.map

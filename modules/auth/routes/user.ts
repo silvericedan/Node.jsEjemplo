@@ -18,7 +18,7 @@ router.post('/login', async (req, res) => {
     console.log('Entra a login');
     try {
         let token = await login(req.body);
-
+        console.log('Este es el token: ', token);
         res.send({
             mensaje: 'Login Exitoso',
             token: token
