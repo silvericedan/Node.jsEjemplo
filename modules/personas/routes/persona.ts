@@ -1,58 +1,52 @@
 import * as express from "express";
 import { personaSchema } from "./../schemas/persona";
-import {verifyToken} from './../../auth/middlewares/authJwt';
+import { verifyToken } from './../../auth/middlewares/authJwt';
 
 const router = express.Router();
 
 //Callbacks
 
-router.get("/persona", (req, res, next) => {
-  personaSchema.find(function (err, persona) {
-    if (err) return;
-
+router.get("/persona", async (req, res, next) => {
+  try {
+    let persona = await personaSchema.find();
     res.send(persona);
-  });
-
+  } catch (err) {
+    throw err;
+  }
 });
 
-router.post("/persona", (req, res) => {
+router.post("/persona", async (req, res) => {
   console.log("Viene persona persona POST: ", req.body);
-  const persona = new personaSchema(req.body);
-
-  persona.save((err, persona) => {
-    if (err) {
-      return err;
-    }
-    res.json(persona);
-  });
+  try {
+    const persona = new personaSchema(req.body);
+    let personaNueva = await persona.save()
+    res.send(personaNueva);
+  } catch (err) {
+    throw err;
+  }
 });
 
-router.put("/persona/:_id", (req, res, next) => {
-  console.log("Viene del PUT: ", req.body);
-  personaSchema.findByIdAndUpdate(req.params._id, req.body,{ new: true }, (err, persona) => {
-      if (err) {
-        return err;
-      }
-      console.log("Persona Nueva: ", persona);
-      return res.send(persona);
-    }
-  );
+router.put("/persona/:_id", async (req, res, next) => {
+  try {
+    const persona = await personaSchema.findByIdAndUpdate(req.params._id, req.body);
+    res.status(202).json({ persona, success: true, mensaje: 'put exitoso' });
+  } catch (err) {
+    return res.status(404).json({ err, success: false });
+  }
 });
 
-router.delete("/persona/:_id", (req, res, next) => {
-  console.log("Viene del DELETE: ");
-  personaSchema.findByIdAndRemove(req.params._id, (err, persona) => {
-    if (err) {
-      console.log("Error: ", err);
-    }
-    console.log("Persona Borrada: ", persona);
-    res.json(persona);
-  });
+router.delete("/persona/:_id", async (req, res, next) => {
+  try {
+    await personaSchema.findByIdAndRemove(req.params._id);
+    res.status(202).json({ success: true, mensaje: 'delete exitoso' });
+  } catch (err) {
+    return res.status(404).json({ err, success: false });
+  }
 });
 
 // Promises 
 
-   function getPersona() {
+function getPersona() {
   return new Promise((resolve, reject) => {
     let persona = personaSchema.find({ nombre: "Ignacio" }).exce();
     if (persona) {
@@ -61,7 +55,7 @@ router.delete("/persona/:_id", (req, res, next) => {
       reject(console.log("No se encontro persona"));
     }
   });
-}  
+}
 
 // Async y Await
 
