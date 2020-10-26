@@ -24,6 +24,7 @@
     "mongoose": "5.10.0",
     "nodemon": "^2.0.4",
     "require": "2.4.20",
-    "require-dir": "1.2.0"
+    "require-dir": "1.2.0",
+    "socket.io": "^2.3.0"
   }
 }
